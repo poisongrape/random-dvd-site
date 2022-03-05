@@ -1,11 +1,11 @@
 import { BrowserRouter } from "react-router-dom";
-import AppLinks from "./routes/AppLinks";
+import { MenuBar } from "./components/MenuBar";
 import AppRoutes from "./AppRoutes";
 
 function App() {
   return (
     <BrowserRouter>
-      <AppLinks />
+      <MenuBar />
       <AppRoutes />
     </BrowserRouter>
   );
