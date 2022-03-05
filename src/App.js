@@ -1,6 +1,13 @@
+import { BrowserRouter } from "react-router-dom";
+import AppLinks from "./AppLinks";
+import AppRoutes from "./AppRoutes";
+
 function App() {
   return (
-    <h1>Hello Vane</h1>
+    <BrowserRouter>
+      <AppLinks />
+      <AppRoutes />
+    </BrowserRouter>
   );
 }
 
