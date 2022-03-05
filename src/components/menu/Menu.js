@@ -1,16 +1,7 @@
 import React from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import { css } from "@emotion/react"
 import { Tabs, Tab } from "@mui/material";
-import { Path } from "../consts";
-
-
-const styles = {
-  drawer: css`
-    display: { xs: block, sm: none },
-    & .MuiDrawer-paper': { boxSizing: border-box, width: 240 }
-  `
-}
+import { Path } from "../../consts";
 
 const tabs = [
   {
@@ -25,7 +16,7 @@ const tabs = [
   },
 ];
 
-export const MenuBar = () => {
+export const Menu = () => {
   const navigate = useNavigate();
   const { pathname } = useLocation();
 
@@ -40,14 +31,12 @@ export const MenuBar = () => {
   const currTab = tabs.find(tab => pathname === tab.route);
 
   return (
-    <>
-      <Tabs onChange={handleOnChange} value={currTab?.route ?? false}>
-        {tabs.map((tab) => {
-          return (
-            <Tab key={tab.id} id={tab.id} label={tab.label} value={tab.route} />
-          );
-        })}
-      </Tabs>
-    </>
+    <Tabs onChange={handleOnChange} value={currTab?.route ?? false}>
+      {tabs.map((tab) => {
+        return (
+          <Tab key={tab.id} id={tab.id} label={tab.label} value={tab.route} />
+        );
+      })}
+    </Tabs>
   );
 };
