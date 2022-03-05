@@ -1,14 +1,15 @@
-import { Link, Route, Routes } from "react-router-dom";
-import Foo from "./Foo";
-import Bar from "./Bar";
+import { Route, Routes } from "react-router-dom";
+import { Path } from "./consts";
+import { HomePage, DetailsPage, ListPage } from "./routes";
+
 
 function AppRoutes() {
   return (
     <>
       <Routes>
-        <Route path="/" element={<Foo />} />
-        <Route path="/foo" element={<Foo />} />
-        <Route path="/bar" element={<Bar />} />
+        <Route path={Path.home} element={<HomePage />} />
+        <Route path={Path.details} element={<DetailsPage />} />
+        <Route path={Path.list} element={<ListPage />} />
       </Routes>
     </>
   );
