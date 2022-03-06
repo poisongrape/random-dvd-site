@@ -1,8 +1,15 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { Box, Typography } from "@mui/material";
 import { css } from "@emotion/react"
+import { Filters, SortType } from "../../consts";
 
 import data from "../../data/dvd-data.json";
+import {
+  filterListByCategory,
+  sortListAlphabetically,
+  sortListByCategory,
+ } from "./utils";
 
 const styles = {
   listItem: css`
@@ -10,62 +17,24 @@ const styles = {
   `
 };
 
-/**
- * Filter dvd items by category.
- * @todo Move to util file.
- * @param {object[]} list - Array of dvd items.
- * @param {string} category - Category to filter on.
- * @returns {object[]} Array of filtered dvd items.
- */
-const filterListByCategory = (list, category) => {
-  let filteredList = [...list];
-
-  filteredList = filteredList.filter(item => item.category.toLowerCase() === category.toLowerCase());
-
-  return filteredList;
-}
-
-/**
- * Sort dvd items alphabetically.
- * @todo Move to util file.
- * @param {object[]} list - Array of dvd items.
- * @returns {object[]} Array of sorted dvd items.
- */
-const sortListAlphabetically = (list) => {
-  let sortedList = [...list];
-
-  sortedList = sortedList.sort((a, b) => {
-    if (a.name < b.name) { return -1; }
-    if (a.name > b.name) { return 1; }
-    return 0;
-  });
-
-  return sortedList;
-}
-
-/**
- * Sort dvd items by category first, then by name.
- * @todo Move to util file.
- * @param {object[]} list - Array of dvd items.
- * @returns {object[]} Array of sorted dvd items.
- */
-const sortListByCategory = (list) => {
-  let sortedList = [...list];
-
-  sortedList = sortListAlphabetically(sortedList);
-  sortedList = sortedList.sort((a, b) => {
-    if (a.category < b.category) { return -1; }
-    if (a.category > b.category) { return 1; }
-    return 0;
-  });
-
-  return sortedList;
-};
-
-export const List = () => {
+export const List = ({
+  filter,
+  sortBy,
+}) => {
   const { items } = data;
+  let updatedItems = [...items];
 
-  const listItems = items.map((item) => {
+  if (filter !== Filters.all) {
+    updatedItems = filterListByCategory(updatedItems, filter);
+  }
+
+  if (sortBy === SortType.alphabetically) {
+    updatedItems = sortListAlphabetically(updatedItems);
+  } else {
+    updatedItems = sortListByCategory(updatedItems);
+  }
+
+  const listItems = updatedItems.map((item) => {
     return (
       <Box sx={styles.listItem}>
         <Typography>{item.name}</Typography>
@@ -79,3 +48,13 @@ export const List = () => {
     </Box>
   );
 };
+
+List.propTypes = {
+  filter: PropTypes.string,
+  sortBy: PropTypes.string,
+};
+
+List.defaultProps = {
+  filter: "",
+  sortBy: "",
+}
