@@ -14,6 +14,6 @@ export const Filters = {
 };
 
 export const SortType = {
-  category: "category",
   alphabetically: "alphabetically",
+  category: "category",
 };
