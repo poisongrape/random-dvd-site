@@ -9,10 +9,16 @@ const styles = {
     flex-direction: column; 
     align-items: center;
     margin-bottom: 15px;
+    margin-left: auto;
+    margin-right: auto;
+    transition: all .2s ease-in-out;
+    &:hover {
+      transform: scale(1.1);
+    }
   `,
   dvdImage: css`
-    height: 15rem;
-    width: 10rem;
+    height: 20rem;
+    width: 15rem;
     &:hover {
       cursor: pointer;
     }
@@ -34,7 +40,7 @@ export const Dvd = ({
         <Avatar alt={`${name} poster`} src={imageSrc} variant="square" sx={styles.dvdImage} />
       </Box>
       <Box>
-        <Typography>{name}</Typography>
+        <Typography variant="h4">{name}</Typography>
       </Box>
     </Box>
   );
