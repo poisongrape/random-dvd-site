@@ -1,10 +1,10 @@
 import React from "react";
+import { useSelector } from 'react-redux'
 import { useParams } from "react-router-dom";
 import { Box, Typography } from "@mui/material";
 import { css } from "@emotion/react"
 
 import { Dvd } from "../home/Dvd";
-import data from "../../data/dvd-data.json";
 
 const styles = {
   dvdContainer: css`
@@ -16,9 +16,9 @@ const styles = {
 }
 export const DetailsPage = () => {
   const params = useParams();
-  const { dvdId } = params;
-  const { items } = data;
+  const items = useSelector((state) => state);
 
+  const { dvdId } = params;
   let dvdIdNum = parseInt(dvdId, 10);
   const dvdData = items.find(item => item.id === dvdIdNum);
 

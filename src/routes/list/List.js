@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useSelector } from 'react-redux'
 import PropTypes from "prop-types";
 import {
   Box,
@@ -11,7 +12,6 @@ import { css } from "@emotion/react"
 import { useSearchParams } from "react-router-dom";
 
 import { Filters, SortType } from "../../consts";
-import data from "../../data/dvd-data.json";
 import {
   filterListByCategory,
   sortListAlphabetically,
@@ -41,7 +41,7 @@ export const List = ({
   const adminParam = searchParams.get("admin");
   const isAdmin = adminParam?.toLowerCase() === "true";
 
-  const { items } = data;
+  const items = useSelector((state) => state);
   let updatedItems = [...items];
 
   const handleOpen = () => setIsOpen(true);

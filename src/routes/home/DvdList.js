@@ -1,7 +1,7 @@
 import React from "react";
+import { useSelector } from 'react-redux'
 import { Box } from "@mui/material";
 import { css } from "@emotion/react"
-import data from "../../data/dvd-data.json";
 
 import { Dvd } from "./Dvd";
 
@@ -13,7 +13,8 @@ const styles = {
 }
 
 export const DvdList = () => {
-  const { items } = data;
+  const items = useSelector((state) => state);
+
   const dvds = items?.map((item) => {
     const { id, name, image } = item;
 
