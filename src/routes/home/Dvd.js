@@ -18,6 +18,7 @@ export const Dvd = ({
       display: flex;
       flex-direction: column; 
       align-items: center;
+      padding: 30px;
       margin-bottom: 15px;
       margin-left: auto;
       margin-right: auto;
@@ -27,8 +28,8 @@ export const Dvd = ({
       }` : ""}
     `,
     dvdImage: css`
-      height: 20rem;
-      width: 15rem;
+      height: 18rem;
+      width: 13rem;
       ${!disabled ? `&:hover {
         cursor: pointer;
       }` : ""}

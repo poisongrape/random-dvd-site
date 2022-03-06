@@ -1,6 +1,8 @@
 import React from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import { Tabs, Tab } from "@mui/material";
+import { Box, Tabs, Tab } from "@mui/material";
+import { css } from "@emotion/react"
+
 import { Path } from "../../consts";
 
 const tabs = [
@@ -15,6 +17,15 @@ const tabs = [
     route: Path.list,
   },
 ];
+
+const styles = {
+  menuContainer: css`
+    margin-left: 3rem;
+  `,
+  tab: css`
+    color: #EFEEF1
+  `
+}
 
 export const Menu = () => {
   const navigate = useNavigate();
@@ -31,12 +42,23 @@ export const Menu = () => {
   const currTab = tabs.find(tab => pathname === tab.route);
 
   return (
-    <Tabs onChange={handleOnChange} value={currTab?.route ?? false}>
-      {tabs.map((tab) => {
-        return (
-          <Tab key={tab.id} id={tab.id} label={tab.label} value={tab.route} />
-        );
-      })}
-    </Tabs>
+    <Box sx={styles.menuContainer}>
+      <Tabs
+        onChange={handleOnChange}
+        value={currTab?.route ?? false}
+      >
+        {tabs.map((tab) => {
+          return (
+            <Tab
+              key={tab.id}
+              id={tab.id}
+              label={tab.label}
+              value={tab.route}
+              sx={styles.tab}
+            />
+          );
+        })}
+      </Tabs>
+    </Box>
   );
 };
