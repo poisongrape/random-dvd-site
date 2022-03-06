@@ -5,11 +5,6 @@ import {
   Button,
   Divider,
   Link,
-  Checkbox,
-  Dialog,
-  MenuItem,
-  Select,
-  TextField,
   Typography,
 } from "@mui/material";
 import { css } from "@emotion/react"
@@ -22,6 +17,7 @@ import {
   sortListAlphabetically,
   sortListByCategory,
 } from "./utils";
+import { AddDvdDialog } from "./AddDvdDialog";
 
 const styles = {
   listItem: css`
@@ -50,6 +46,10 @@ export const List = ({
 
   const handleOpen = () => setIsOpen(true);
   const handleClose = () => setIsOpen(false);
+  const handleSubmit = (vals) => {
+    console.log(vals);
+    setIsOpen(false);
+  };
 
   if (filter !== Filters.all) {
     updatedItems = filterListByCategory(updatedItems, filter);
@@ -98,18 +98,7 @@ export const List = ({
         {listItems}
       </Box>
 
-      <Dialog open={isOpen} onClose={handleClose}>
-        <Box>
-          <TextField label="name" variant="outlined" />
-          <Select label="category" variant="outlined">
-            <MenuItem value={Filters.comedy}>Comedy</MenuItem>
-            <MenuItem value={Filters.drama}>Drama</MenuItem>
-            <MenuItem value={Filters.news}>News</MenuItem>
-            <MenuItem value={Filters.reality}>Reality</MenuItem>
-          </Select>
-          <Checkbox label="featured" />
-        </Box>
-      </Dialog>
+      <AddDvdDialog onClose={handleClose} onSubmit={handleSubmit} isOpen={isOpen} />
     </>
   );
 };
