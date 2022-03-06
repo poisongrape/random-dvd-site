@@ -2,9 +2,9 @@ import { createStore } from "redux";
 import data from "../data/dvd-data.json";
 import { DELETE_DVD, ADD_DVD } from "../actions/actions";
 
-const initialState = data?.items;
+export const initialState = data?.items;
 
-function reducer(state = initialState, action) {
+export function reducer(state = initialState, action) {
   switch (action.type) {
     case DELETE_DVD:
       return state.filter((dvd) => {
