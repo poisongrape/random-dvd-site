@@ -69,11 +69,12 @@ export const List = ({
 
   const listItems = updatedItems.map((item) => {
     return (
-      <>
+      <Box key={item.id}>
         <Box sx={styles.listItem}>
           <Box>
             <Typography>{item.name}</Typography>
           </Box>
+
           {
             isAdmin &&
             <Box>
@@ -85,9 +86,10 @@ export const List = ({
               </Button>
             </Box>
           }
+
         </Box>
         <Divider />
-      </>
+      </Box>
     );
   });
 

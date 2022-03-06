@@ -19,7 +19,7 @@ export const DvdList = () => {
     const { id, name, image } = item;
 
     return (
-      <Box>
+      <Box key={id}>
         <Dvd id={id} name={name} image={image} />
       </Box>
     );
