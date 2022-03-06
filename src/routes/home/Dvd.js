@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { useNavigate } from "react-router-dom";
 import { Avatar, Box, Typography } from "@mui/material";
+import BlockIcon from '@mui/icons-material/Block';
 import { css } from "@emotion/react"
 import { Path } from "../../consts";
 
@@ -42,12 +43,23 @@ export const Dvd = ({
     }
   }
 
-  if (!name || !imageSrc) return null;
+  if (!name) return null;
 
   return (
     <Box key={`${uid}`} sx={styles.dvd}>
       <Box onClick={handleOnClick}>
-        <Avatar alt={`${name} poster`} src={imageSrc} variant="square" sx={styles.dvdImage} />
+        {
+          imageSrc ? 
+          (
+            <Avatar alt={`${name} poster`} src={imageSrc} variant="square" sx={styles.dvdImage} />
+          ) :
+          (
+            <Avatar alt={`${name} poster`} src={imageSrc} variant="square" sx={styles.dvdImage}>
+              <BlockIcon />
+              <Typography>Image not available</Typography>
+            </Avatar>
+          )
+        }
       </Box>
       <Box>
         <Typography variant="h4">{name}</Typography>
