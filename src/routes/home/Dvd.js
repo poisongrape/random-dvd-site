@@ -1,7 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { useNavigate } from "react-router-dom";
 import { Avatar, Box, Typography } from "@mui/material";
 import { css } from "@emotion/react"
+import { Path } from "../../consts";
 
 const styles = {
   dvd: css`
@@ -30,13 +32,18 @@ export const Dvd = ({
   name,
   image: imageSrc,
 }) => {
-  if (!name || !imageSrc) return null;
-
+  const navigate = useNavigate();
   const uid = `${name}-${id}`;
+
+  const handleOnClick = () => {
+    navigate(`${Path.details}/${id}`);
+  }
+
+  if (!name || !imageSrc) return null;
 
   return (
     <Box key={`${uid}`} sx={styles.dvd}>
-      <Box>
+      <Box onClick={handleOnClick}>
         <Avatar alt={`${name} poster`} src={imageSrc} variant="square" sx={styles.dvdImage} />
       </Box>
       <Box>

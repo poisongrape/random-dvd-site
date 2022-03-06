@@ -8,8 +8,13 @@ function AppRoutes() {
     <>
       <Routes>
         <Route path={Path.home} element={<HomePage />} />
-        <Route path={Path.details} element={<DetailsPage />} />
+        <Route path={Path.details} element={<DetailsPage />}>
+          <Route path=":dvdId" element={<DetailsPage />} />
+        </Route>
         <Route path={Path.list} element={<ListPage />} />
+        <Route path="*" element={
+          <h1>Oops, nothing here!</h1>
+        } />
       </Routes>
     </>
   );
