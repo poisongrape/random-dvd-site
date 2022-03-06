@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import PropTypes from "prop-types";
 import {
   Box,
@@ -18,6 +18,7 @@ import {
   sortListByCategory,
 } from "./utils";
 import { AddDvdDialog } from "./AddDvdDialog";
+import { addDvd, deleteDvd } from "../../actions/actions";
 
 const styles = {
   listItem: css`
@@ -44,12 +45,17 @@ export const List = ({
   const items = useSelector((state) => state);
   let updatedItems = [...items];
 
+  const dispatch = useDispatch();
+
   const handleOpen = () => setIsOpen(true);
   const handleClose = () => setIsOpen(false);
   const handleSubmit = (vals) => {
-    console.log(vals);
+    dispatch(addDvd(vals))
     setIsOpen(false);
   };
+  const handleDelete = (id) => {
+    dispatch(deleteDvd(id));
+  }
 
   if (filter !== Filters.all) {
     updatedItems = filterListByCategory(updatedItems, filter);
@@ -71,7 +77,12 @@ export const List = ({
           {
             isAdmin &&
             <Box>
-              <Button variant="contained">Delete</Button>
+              <Button
+                onClick={() => { handleDelete(item.id) }}
+                variant="contained"
+              >
+                Delete
+              </Button>
             </Box>
           }
         </Box>
