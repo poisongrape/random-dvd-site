@@ -1,10 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import {
   Box,
   Button,
   Divider,
   Link,
+  Checkbox,
+  Dialog,
+  MenuItem,
+  Select,
+  TextField,
   Typography,
 } from "@mui/material";
 import { css } from "@emotion/react"
@@ -16,7 +21,7 @@ import {
   filterListByCategory,
   sortListAlphabetically,
   sortListByCategory,
- } from "./utils";
+} from "./utils";
 
 const styles = {
   listItem: css`
@@ -34,11 +39,17 @@ export const List = ({
   filter,
   sortBy,
 }) => {
+  const [isOpen, setIsOpen] = useState(false);
+
   const [searchParams] = useSearchParams();
   const adminParam = searchParams.get("admin");
   const isAdmin = adminParam?.toLowerCase() === "true";
+
   const { items } = data;
   let updatedItems = [...items];
+
+  const handleOpen = () => setIsOpen(true);
+  const handleClose = () => setIsOpen(false);
 
   if (filter !== Filters.all) {
     updatedItems = filterListByCategory(updatedItems, filter);
@@ -70,20 +81,36 @@ export const List = ({
   });
 
   return (
-    <Box>
-      {
-        isAdmin &&
-        <Box sx={styles.addLink}>
-          <Link
-            component="button"
-            variant="h5"
-          >
-            Add DVD
-          </Link>
+    <>
+      <Box>
+        {
+          isAdmin &&
+          <Box sx={styles.addLink}>
+            <Link
+              component="button"
+              onClick={handleOpen}
+              variant="h5"
+            >
+              Add DVD
+            </Link>
+          </Box>
+        }
+        {listItems}
+      </Box>
+
+      <Dialog open={isOpen} onClose={handleClose}>
+        <Box>
+          <TextField label="name" variant="outlined" />
+          <Select label="category" variant="outlined">
+            <MenuItem value={Filters.comedy}>Comedy</MenuItem>
+            <MenuItem value={Filters.drama}>Drama</MenuItem>
+            <MenuItem value={Filters.news}>News</MenuItem>
+            <MenuItem value={Filters.reality}>Reality</MenuItem>
+          </Select>
+          <Checkbox label="featured" />
         </Box>
-      }
-      {listItems}
-    </Box>
+      </Dialog>
+    </>
   );
 };
 
