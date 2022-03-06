@@ -5,38 +5,40 @@ import { Avatar, Box, Typography } from "@mui/material";
 import { css } from "@emotion/react"
 import { Path } from "../../consts";
 
-const styles = {
-  dvd: css`
-    display: flex;
-    flex-direction: column; 
-    align-items: center;
-    margin-bottom: 15px;
-    margin-left: auto;
-    margin-right: auto;
-    transition: all .2s ease-in-out;
-    &:hover {
-      transform: scale(1.1);
-    }
-  `,
-  dvdImage: css`
-    height: 20rem;
-    width: 15rem;
-    &:hover {
-      cursor: pointer;
-    }
-  `
-}
-
 export const Dvd = ({
   id,
   name,
   image: imageSrc,
+  disabled,
 }) => {
   const navigate = useNavigate();
   const uid = `${name}-${id}`;
+  const styles = {
+    dvd: css`
+      display: flex;
+      flex-direction: column; 
+      align-items: center;
+      margin-bottom: 15px;
+      margin-left: auto;
+      margin-right: auto;
+      transition: all .2s ease-in-out;
+      ${!disabled ? `&:hover {
+        transform: scale(1.1);
+      }` : ""}
+    `,
+    dvdImage: css`
+      height: 20rem;
+      width: 15rem;
+      ${!disabled ? `&:hover {
+        cursor: pointer;
+      }` : ""}
+    `
+  }
 
   const handleOnClick = () => {
-    navigate(`${Path.details}/${id}`);
+    if (!disabled) {
+      navigate(`${Path.details}/${id}`);
+    }
   }
 
   if (!name || !imageSrc) return null;
@@ -54,7 +56,12 @@ export const Dvd = ({
 };
 
 Dvd.propTypes = {
-  id: PropTypes.number,
-  name: PropTypes.string,
-  image: PropTypes.string,
+  id: PropTypes.number.isRequired,
+  name: PropTypes.string.isRequired,
+  image: PropTypes.string.isRequired,
+  disabled: PropTypes.bool,
+};
+
+Dvd.defaultProps = {
+  disabled: false,
 };

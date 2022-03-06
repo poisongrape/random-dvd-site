@@ -29,7 +29,7 @@ export const DetailsPage = () => {
   return (
     <section>
       <Box sx={styles.dvdContainer}>
-        <Dvd id={dvdData.id} name={dvdData.name} image={dvdData.image} />
+        <Dvd id={dvdData.id} name={dvdData.name} image={dvdData.image} disabled/>
       </Box>
     </section>
   )
