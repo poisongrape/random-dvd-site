@@ -1,5 +1,6 @@
 import React from "react";
+import { FilterForm } from "./FilterForm";
 
 export const ListPage = () => {
-  return <h1>List Page</h1>
+  return <FilterForm />
 };
