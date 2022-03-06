@@ -1,9 +1,16 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Box, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  Divider,
+  Link,
+  Typography,
+} from "@mui/material";
 import { css } from "@emotion/react"
-import { Filters, SortType } from "../../consts";
+import { useSearchParams } from "react-router-dom";
 
+import { Filters, SortType } from "../../consts";
 import data from "../../data/dvd-data.json";
 import {
   filterListByCategory,
@@ -14,6 +21,12 @@ import {
 const styles = {
   listItem: css`
     padding: 3rem;
+    display: flex;
+    justify-content: space-between;
+  `,
+  addLink: css`
+    display: flex;
+    justify-content: center;
   `
 };
 
@@ -21,6 +34,9 @@ export const List = ({
   filter,
   sortBy,
 }) => {
+  const [searchParams] = useSearchParams();
+  const adminParam = searchParams.get("admin");
+  const isAdmin = adminParam?.toLowerCase() === "true";
   const { items } = data;
   let updatedItems = [...items];
 
@@ -36,14 +52,36 @@ export const List = ({
 
   const listItems = updatedItems.map((item) => {
     return (
-      <Box sx={styles.listItem}>
-        <Typography>{item.name}</Typography>
-      </Box>
+      <>
+        <Box sx={styles.listItem}>
+          <Box>
+            <Typography>{item.name}</Typography>
+          </Box>
+          {
+            isAdmin &&
+            <Box>
+              <Button variant="contained">Delete</Button>
+            </Box>
+          }
+        </Box>
+        <Divider />
+      </>
     );
   });
 
   return (
     <Box>
+      {
+        isAdmin &&
+        <Box sx={styles.addLink}>
+          <Link
+            component="button"
+            variant="h5"
+          >
+            Add DVD
+          </Link>
+        </Box>
+      }
       {listItems}
     </Box>
   );
