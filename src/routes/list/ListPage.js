@@ -1,8 +1,17 @@
 import React, { useState } from "react";
-import { Box } from "@mui/material";
+import { Box, Divider } from "@mui/material";
+import { css } from "@emotion/react"
+
 import { FilterForm } from "./FilterForm";
 import { List } from "./List";
 import { Filters, SortType } from "../../consts";
+
+const styles = {
+  formContainer: css`
+    display: flex;
+    justify-content: center;
+  `
+};
 
 export const ListPage = () => {
   const [filter, setFilter] = useState(Filters.all);
@@ -18,10 +27,13 @@ export const ListPage = () => {
 
   return (
     <Box>
-      <FilterForm
-        handleFilterOnChange={handleFilterOnChange}
-        handleSortOnChange={handleSortOnChange}
-      />
+      <Box sx={styles.formContainer}>
+        <FilterForm
+          handleFilterOnChange={handleFilterOnChange}
+          handleSortOnChange={handleSortOnChange}
+        />
+      </Box>
+      <Divider />
       <List filter={filter} sortBy={sortBy}/>
     </Box>
   );
