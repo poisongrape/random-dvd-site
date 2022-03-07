@@ -47,7 +47,7 @@ export const Dvd = ({
 
   return (
     <Box key={`${uid}`} sx={styles.dvd}>
-      <Box onClick={handleOnClick}>
+      <Box id="poster-container" onClick={handleOnClick}>
         {
           imageSrc ? 
           (
