@@ -42,6 +42,12 @@ export const AddDvdDialog = ({
   const [dvdCategory, setDvdCategory] = useState(Filters.comedy);
   const [dvdIsFeatured, setDvdIsFeatured] = useState(false);
 
+  const resetVals = () => {
+    setDvdName("");
+    setDvdCategory(Filters.comedy);
+    setDvdIsFeatured(false);
+  };
+
   const saveName = (event) => {
     setDvdName(event?.target?.value);
   };
@@ -62,6 +68,7 @@ export const AddDvdDialog = ({
     };
 
     onSubmit(vals);
+    resetVals();
   };
 
   return (
