@@ -2,6 +2,8 @@
 
 A sample website that displays DVDs.
 
+**See below for recordings of the App**
+
 # 3rd Party Libs Used
 
 * create-react-app
@@ -42,3 +44,19 @@ I added a few unit tests in the app. Since this is not a real-world project, I f
 * Covering functions such as reducers and util functions.
 * Covering simple components, such as the Details Page.
 * Covering complex components that rely on external modules, such as the DVD component.
+
+## Recordings
+
+### Home and Details Page
+![demo-home-and-details](https://user-images.githubusercontent.com/10935061/156993988-e78deaeb-cdd2-442e-9548-db9d4eef3481.gif)
+
+### List Page
+![demo-list-page](https://user-images.githubusercontent.com/10935061/156994386-d803d8f4-eb38-4b48-a606-0f23c0b5678b.gif)
+
+### List Page - Admin View
+![demo-list-page-admin](https://user-images.githubusercontent.com/10935061/156994979-d20119dd-37da-4b33-b336-ca4be0493d9d.gif)
+
+### Unlisted Page
+![demo-unlisted](https://user-images.githubusercontent.com/10935061/156995146-34efb17d-e7c7-4ab3-b7d4-0b33424d1fa1.gif)
+
+
