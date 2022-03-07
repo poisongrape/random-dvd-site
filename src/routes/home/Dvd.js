@@ -71,10 +71,11 @@ export const Dvd = ({
 Dvd.propTypes = {
   id: PropTypes.number.isRequired,
   name: PropTypes.string.isRequired,
-  image: PropTypes.string.isRequired,
+  image: PropTypes.string,
   disabled: PropTypes.bool,
 };
 
 Dvd.defaultProps = {
   disabled: false,
+  image: "",
 };
