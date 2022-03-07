@@ -15,7 +15,10 @@ const styles = {
 export const DvdList = () => {
   const items = useSelector((state) => state);
 
-  const dvds = items?.map((item) => {
+  const dvds = items?.filter((item) => {
+    return item.featured === true;
+  })
+  .map((item) => {
     const { id, name, image } = item;
 
     return (
